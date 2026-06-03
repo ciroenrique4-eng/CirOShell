@@ -1,0 +1,164 @@
+/*****----- menu.rasi -----*****
+ * Tema compacto y centrado para los menús dmenu de los scripts de Hyprland
+ * (modo de color, bluetooth, selectores de configuración...).
+ * Se autoajusta en altura al número de opciones (hasta 8 líneas).
+ *****/
+
+/*****----- Configuration -----*****/
+configuration {
+    show-icons: false;
+}
+
+/*****----- Global Properties -----*****/
+@import "shared/colors.rasi"
+@import "shared/fonts.rasi"
+
+* {
+    border-colour:               var(selected);
+    handle-colour:               var(selected-text);
+    background-colour:           var(background);
+    foreground-colour:           var(foreground);
+    alternate-background:        var(background-alt);
+
+    normal-background:           var(background);
+    normal-foreground:           var(foreground);
+    selected-normal-background:  var(selected);
+    selected-normal-foreground:  var(selected-text);
+    urgent-background:           var(urgent);
+    urgent-foreground:           var(background);
+}
+
+/*****----- Main Window -----*****/
+window {
+    transparency:                "real";
+
+    /* Pegado al borde izquierdo y centrado verticalmente (igual que wallpapers.rasi) */
+    location:                    west;
+    anchor:                      west;
+    fullscreen:                  false;
+    width:                       360px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      2px 2px 2px 0px solid;
+    /* Bordes redondeados solo del lado derecho */
+    border-radius:               0px 12px 12px 0px;
+    border-color:                @border-colour;
+    cursor:                      "default";
+    background-color:            @background-colour;
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     12px;
+    margin:                      0px;
+    padding:                     18px;
+    border:                      0px solid;
+    border-color:                @border-colour;
+    background-color:            transparent;
+    children:                    [ "inputbar", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     0px;
+    margin:                      0px;
+    padding:                     0px;
+    background-color:            transparent;
+    text-color:                  @foreground-colour;
+    orientation:                 horizontal;
+    children:                    [ "entry-box" ];
+}
+
+entry-box {
+    spacing:                     10px;
+    padding:                     8px 12px;
+    border-radius:               8px;
+    background-color:            @alternate-background;
+    text-color:                  inherit;
+    orientation:                 horizontal;
+    expand:                      true;
+    children:                    [ "prompt", "entry" ];
+}
+
+prompt {
+    enabled:                     true;
+    padding:                     5px 0px;
+    background-color:            inherit;
+    text-color:                  inherit;
+}
+
+entry {
+    enabled:                     true;
+    padding:                     5px 0px;
+    background-color:            inherit;
+    text-color:                  inherit;
+    cursor:                      text;
+    placeholder:                 "Buscar...";
+    placeholder-color:           inherit;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       8;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   true;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                false;
+    fixed-columns:               true;
+
+    spacing:                     5px;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-color:                @border-colour;
+    background-color:            transparent;
+    text-color:                  @foreground-colour;
+    cursor:                      "default";
+}
+
+scrollbar {
+    handle-width:                4px;
+    handle-color:                @handle-colour;
+    border-radius:               10px;
+    background-color:            @alternate-background;
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    spacing:                     10px;
+    margin:                      0px;
+    padding:                     9px 12px;
+    border:                      0px solid;
+    border-radius:               6px;
+    border-color:                @border-colour;
+    background-color:            transparent;
+    text-color:                  @foreground-colour;
+    cursor:                      pointer;
+}
+element normal.normal {
+    background-color:            var(normal-background);
+    text-color:                  var(normal-foreground);
+}
+element selected.normal {
+    background-color:            var(selected-normal-background);
+    text-color:                  var(selected-normal-foreground);
+}
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    highlight:                   inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}

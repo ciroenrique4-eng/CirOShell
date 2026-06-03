@@ -1,0 +1,248 @@
+* {
+    font-family: FiraCode Nerd Font;
+    font-size: 13px;
+}
+
+.notification-row {
+    outline: none;
+    margin: 4px;
+}
+
+.notification-row:focus,
+.notification-row:hover {
+    background: transparent;
+}
+
+/* === Popups de Notificaciones === */
+.notification {
+    background: #1f1f25;
+    border: 1px solid #46464f;
+    border-radius: 12px;
+    padding: 12px;
+    margin: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+}
+
+.notification-content {
+    padding: 0;
+}
+
+.notification-icon, .image {
+    min-width: 40px;
+    min-height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+.notification-default-action {
+    background: transparent;
+    border-radius: 8px;
+    padding: 0;
+    transition: background 0.15s ease;
+}
+
+.notification-default-action:hover {
+    background: #2a292f;
+}
+
+.summary {
+    font-size: 13px;
+    font-weight: bold;
+    color: #e4e1e9;
+}
+
+.body {
+    font-size: 12px;
+    color: #c7c5d0;
+}
+
+.app-name, .time {
+    font-size: 11px;
+    color: #918f9a;
+}
+
+.close-button {
+    background: transparent;
+    color: #c7c5d0;
+    border-radius: 8px;
+    border: none;
+    padding: 4px 6px;
+    font-size: 11px;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.close-button:hover {
+    background: #93000a;
+    color: #ffdad6;
+}
+
+.notification-action {
+    background: #454559;
+    color: #e2e0f9;
+    border-radius: 8px;
+    border: none;
+    margin: 4px 2px;
+    padding: 4px 10px;
+    font-size: 12px;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.notification-action:hover {
+    background: #c0c1ff;
+    color: #282a60;
+}
+
+/* === Control Center === */
+.control-center {
+    background: #131318;
+    border: 1px solid #46464f;
+    border-radius: 14px;
+    padding: 6px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+.control-center-list {
+    background: transparent;
+}
+
+/* === Scrollbar === */
+scrollbar {
+    background: transparent;
+    min-width: 4px;
+}
+
+scrollbar slider {
+    background: #46464f;
+    border-radius: 4px;
+    min-height: 40px;
+}
+
+scrollbar slider:hover {
+    background: #918f9a;
+}
+
+.widget-title {
+    color: #e4e1e9;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 8px 6px 4px 6px;
+}
+
+.widget-title > button {
+    background: #1f1f25;
+    color: #c7c5d0;
+    border-radius: 8px;
+    border: none;
+    font-size: 11px;
+    padding: 4px 8px;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.widget-title > button:hover {
+    background: #93000a;
+    color: #ffdad6;
+}
+
+/* === Switch de Silenciar (DND) === */
+.widget-dnd {
+    margin: 4px 6px;
+    font-size: 12px;
+    color: #e4e1e9;
+}
+
+.widget-dnd > switch {
+    background: #35343a;
+    border-radius: 12px;
+    border: 1px solid #918f9a;
+    min-height: 24px;
+    min-width: 44px;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.widget-dnd > switch:checked {
+    background: #c0c1ff;
+    border-color: #c0c1ff;
+}
+
+.widget-dnd > switch slider {
+    background: #918f9a;
+    border-radius: 10px;
+    min-width: 16px;
+    min-height: 16px;
+    transition: background 0.2s ease;
+}
+
+.widget-dnd > switch:checked slider {
+    background: #282a60;
+}
+
+/* === Reproductor MPRIS === */
+.widget-mpris {
+    background: #2a292f;
+    border-radius: 10px;
+    margin: 6px;
+    padding: 8px;
+    color: #e4e1e9;
+}
+
+.widget-mpris-title {
+    font-weight: bold;
+    font-size: 12px;
+    color: #e4e1e9;
+}
+
+.widget-mpris-subtitle {
+    font-size: 11px;
+    color: #c7c5d0;
+}
+
+.widget-mpris > box > button,
+.widget-mpris > box > box > button {
+    background: transparent;
+    color: #c7c5d0;
+    border: none;
+    border-radius: 8px;
+    padding: 4px 8px;
+    font-size: 14px;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.widget-mpris > box > button:hover,
+.widget-mpris > box > box > button:hover {
+    background: #3f4178;
+    color: #e1e0ff;
+}
+
+/* === Botones de Energía (Buttons Grid) === */
+.widget-buttons-grid {
+    background: #1f1f25;
+    border-radius: 12px;
+    margin: 6px;
+    padding: 4px;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button {
+    background: transparent;
+    color: #e4e1e9;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 16px;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:hover {
+    background: #3f4178;
+    color: #e1e0ff;
+}
+
+/* === Urgencia === */
+.critical {
+    border-color: #ffb4ab;
+    border-width: 2px;
+}
+
+.low {
+    opacity: 0.85;
+}

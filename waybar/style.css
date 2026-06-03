@@ -1,0 +1,95 @@
+@import "colors.css";
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "FiraCode Nerd Font", "Noto Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  min-height: 0;
+}
+
+window#waybar {
+  background: @base;
+  color: @text;
+  border-radius: 12px;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+  margin: 3px 6px;
+}
+
+/* ── Módulos base ─────────────────────────────────────────────── */
+#workspaces,
+#custom-mpris,
+#network,
+#power-profiles-daemon,
+#battery,
+#clock {
+  background: @surface;
+  color: @text;
+  padding: 4px 12px;
+  border-radius: 8px;
+  margin: 3px 2px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+/* ── Workspaces ───────────────────────────────────────────────── */
+#workspaces {
+  padding: 4px 6px;
+}
+#workspaces button {
+  background: transparent;
+  color: @text_muted;
+  padding: 0 6px;
+  border-radius: 6px;
+  transition: background 0.15s ease, color 0.15s ease;
+  min-width: 0;
+}
+#workspaces button:hover  { background: @surface_high; color: @text; }
+#workspaces button.active { background: @primary_container; color: @on_primary_container; }
+#workspaces button.urgent { background: @error; color: @on_error; }
+
+/* ── Reproductor ──────────────────────────────────────────────── */
+#custom-mpris         { color: @secondary; }
+#custom-mpris.paused  { color: @text_muted; font-style: italic; }
+#custom-mpris.stopped {            /* sin reproductor: oculta el módulo */
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+/* ── Red ──────────────────────────────────────────────────────── */
+#network              { color: @text; }
+#network.disconnected { color: @error; opacity: 0.7; }
+
+/* ── Perfil de energía ────────────────────────────────────────── */
+#power-profiles-daemon             { color: @text; }
+#power-profiles-daemon.performance { color: @tertiary; }
+#power-profiles-daemon.power-saver { color: @secondary; }
+
+/* ── Batería ──────────────────────────────────────────────────── */
+#battery                            { color: @text; }
+#battery.charging, #battery.plugged { color: @primary; }
+#battery.warning:not(.charging)     { color: @tertiary; }
+#battery.critical:not(.charging)    {
+  color: @error;
+  animation: blink-bat 0.5s linear infinite alternate;
+}
+@keyframes blink-bat { to { opacity: 0.4; } }
+
+/* ── Reloj ────────────────────────────────────────────────────── */
+#clock { color: @on_primary_container; background: @primary_container; }
+
+/* ── Tooltip ──────────────────────────────────────────────────── */
+tooltip {
+  background: @surface_high;
+  color: @text;
+  border: 1px solid @outline_variant;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 12px;
+}
+tooltip label { color: @text; }

@@ -1,0 +1,93 @@
+// ~/.config/waybar/config.jsonc — versión minimalista
+{
+  "layer": "top",
+  "position": "top",
+  "height": 34,
+  "spacing": 4,
+  "margin-top": 6,
+  "margin-left": 80,
+  "margin-right": 80,
+
+  "modules-left": [
+    "hyprland/workspaces"
+  ],
+
+  "modules-center": [
+    "custom/mpris"
+  ],
+
+  "modules-right": [
+    "network",
+    "power-profiles-daemon",
+    "battery",
+    "clock"
+  ],
+
+  // ─── Workspaces ───────────────────────────────────────────────────────────
+  "hyprland/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "format": "{icon}",
+    "format-icons": {
+      "default": "",
+      "empty": "",
+      "focused": "",
+      "active": ""
+    },
+    "persistent-workspaces": {
+      "*": [1, 2, 3, 4, 5]
+    }
+  },
+
+  // ─── Reproductor (reemplaza a mpris, a prueba de crashes) ─────────────────
+  "custom/mpris": {
+    "exec": "~/.config/waybar/scripts/mpris.sh",
+    "return-type": "json",
+    "restart-interval": 3,
+    "max-length": 45,
+    "on-click": "playerctl play-pause",
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous"
+  },
+
+  // ─── Red ──────────────────────────────────────────────────────────────────
+  "network": {
+    "format-wifi": "󰤨  {essid}",
+    "format-ethernet": "󰈀  {ipaddr}",
+    "format-disconnected": "󰤭  Sin red",
+    "format-linked": "󰈀  {ifname}",
+    "tooltip-format-wifi": "SSID: {essid}\nSeñal: {signalStrength}%\nIP: {ipaddr}",
+    "tooltip-format-ethernet": "IP: {ipaddr}",
+    "on-click": "kitty -- nmtui"
+  },
+
+  // ─── Perfil de energía ────────────────────────────────────────────────────
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Perfil de energía: {profile}\nDriver: {driver}",
+    "tooltip": true,
+    "format-icons": {
+      "default":     "󰾆",
+      "performance": "󰓅",
+      "balanced":    "",
+      "power-saver": "󰾷"
+    }
+  },
+
+  // ─── Batería ──────────────────────────────────────────────────────────────
+  "battery": {
+    "states": { "warning": 30, "critical": 15 },
+    "format":          "{icon}  {capacity}%",
+    "format-charging": "󰂄  {capacity}%",
+    "format-plugged":  "󰚥  {capacity}%",
+    "format-icons":    ["󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"],
+    "tooltip-format":  "{timeTo} · {power:.1f}W"
+  },
+
+  // ─── Reloj (12 horas) ─────────────────────────────────────────────────────
+  "clock": {
+    "format":     "  {:%I:%M %p}",
+    "format-alt": "  {:%a %d %b %Y}",
+    "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>"
+  }
+}

@@ -1,0 +1,171 @@
+/*****----- Configuration -----*****/
+configuration {
+    show-icons:                 true;
+}
+
+/*****----- Global Properties -----*****/
+@import                          "shared/colors.rasi"
+@import                          "shared/fonts.rasi"
+
+* {
+    border-colour:               var(selected);
+    handle-colour:               var(selected-text);
+    background-colour:           var(background);
+    foreground-colour:           var(foreground);
+    alternate-background:        var(background-alt);
+    normal-background:           var(background);
+    normal-foreground:           var(foreground);
+    selected-normal-background:  var(selected);
+    selected-normal-foreground:  var(selected-text);
+    /* Color del anillo que resalta la miniatura activa */
+    ring-colour:                 var(selected-text);
+}
+
+/*****----- Main Window -----*****/
+window {
+    transparency:                "real";
+
+    /* Pegado al borde izquierdo y centrado verticalmente */
+    location:                    west;
+    anchor:                      west;
+
+    /* Panel lateral compacto */
+    width:                       200px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     0px;
+    /* Sin borde en el lado izquierdo (toca la pantalla) */
+    border:                      2px 2px 2px 0px solid;
+
+    /* Bordes redondeados solo del lado derecho */
+    border-radius:               0px 15px 15px 0px;
+    border-color:                @border-colour;
+    cursor:                      "default";
+    background-color:            @background-colour;
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     10px;
+    margin:                      0px;
+    padding:                     15px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @border-colour;
+    background-color:            transparent;
+    children:                    [ "inputbar", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     15px;
+    margin:                      0px;
+    padding:                     0px;
+    background-color:            transparent;
+    text-color:                  @foreground-colour;
+    orientation:                 horizontal;
+    children:                    [ "entry-box" ];
+}
+
+entry-box {
+    spacing:                     10px;
+    padding:                     8px 12px;
+    border-radius:               8px;
+    background-color:            @alternate-background;
+    text-color:                  inherit;
+    orientation:                 horizontal;
+    expand:                      true;
+    children:                    [ "prompt", "entry" ];
+}
+
+prompt {
+    enabled:                     true;
+    padding:                     2px 0px;
+    background-color:            inherit;
+    text-color:                  inherit;
+}
+
+entry {
+    enabled:                     false;
+    padding:                     2px 0px;
+    background-color:            inherit;
+    text-color:                  inherit;
+    cursor:                      text;
+    placeholder:                 "Buscar Wallpaper...";
+    placeholder-color:           inherit;
+}
+
+/*****----- Listview (Carrusel de Wallpapers) -----*****/
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       4;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+
+    /* Pequeña separación entre miniaturas */
+    spacing:                     6px;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @border-colour;
+    background-color:            transparent;
+    text-color:                  @foreground-colour;
+    cursor:                      "default";
+}
+
+scrollbar {
+    handle-width:                3px ;
+    handle-color:                @handle-colour;
+    border-radius:               10px;
+    background-color:            @alternate-background;
+}
+
+/*****----- Elements (Solo Miniatura) -----*****/
+element {
+    enabled:                     true;
+    spacing:                     0px;
+    margin:                      0px;
+    padding:                     3px;
+    /* Borde transparente reservado: el seleccionado lo "enciende" sin mover el layout */
+    border:                      2px solid;
+    border-radius:               8px;
+    border-color:                transparent;
+    background-color:            transparent;
+    text-color:                  @foreground-colour;
+
+    /* Clave: Rofi no renderiza el texto, solo la miniatura */
+    children:                    [ "element-icon" ];
+
+    cursor:                      pointer;
+}
+
+element normal.normal    { background-color: transparent; border-color: transparent; }
+element alternate.normal { background-color: transparent; border-color: transparent; }
+
+/* Anillo de color alrededor de la miniatura activa */
+element selected.normal {
+    background-color:            var(selected-normal-background);
+    border-color:                @ring-colour;
+}
+
+element-icon {
+    background-color:            transparent;
+    text-color:                  inherit;
+    /* Tamaño compacto, como antes */
+    size:                        8.5em;
+    cursor:                      inherit;
+    horizontal-align:            0.5;
+    vertical-align:              0.5;
+}

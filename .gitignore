@@ -1,0 +1,25 @@
+# --- Basura y archivos generados en tiempo de ejecución ---
+
+# Respaldos creados por install.sh y editores
+*.bak
+*.bak-*
+*.bak.*
+
+# fish: variables universales temporales (fish_variables<aleatorio>) y locks
+fish/fish_variables?*
+fish/.psub.*
+
+# micro: estado de ejecución, no configuración
+micro/backups/
+micro/buffers/
+
+# Directorio creado por error (expansión de llaves)
+hypr/{hyprland,scheme,scripts}/
+
+# Imágenes/capturas sueltas que no son configuración
+waybar/*.png
+
+# Estado de sesión / cachés varias
+*.log
+*.tmp
+*~

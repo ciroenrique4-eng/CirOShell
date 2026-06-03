@@ -1,0 +1,8 @@
+/*
+ * Tipografía compartida de Rofi.
+ * FiraCode Nerd Font (Medium) incluye los glifos (iconos NF) que usan los menús.
+ */
+
+* {
+    font: "FiraCode Nerd Font Medium 11";
+}

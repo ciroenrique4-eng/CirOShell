@@ -1,0 +1,288 @@
+/*****----- Configuration -----*****/
+configuration {
+    /* Agregamos 'myscripts' apuntando a tu nuevo script bash y quitamos 'run' */
+    modi:                       "drun,myscripts:~/.config/hypr/scripts_menu.sh,ssh";
+    show-icons:                 true;
+    icon-theme:                 "Papirus-Dark";
+    
+    /* Iconos NF al lado del nombre de cada panel */
+    display-drun:               " App";
+    display-myscripts:          " Run";
+    display-ssh:                "󰣀 SSH";
+    
+    /* Configuración de formato */
+    drun-display-format:        "{name}";
+}
+
+/*****----- Global Properties -----*****/
+@import                          "shared/colors.rasi"
+@import                          "shared/fonts.rasi"
+
+* {
+    border-colour:               var(selected);
+    /* Usamos el color de texto (primary) para que la barra de desplazamiento resalte */
+    handle-colour:               var(selected-text); 
+    background-colour:           var(background);
+    foreground-colour:           var(foreground);
+    alternate-background:        var(background-alt);
+    
+    normal-background:           var(background);
+    normal-foreground:           var(foreground);
+    
+    urgent-background:           var(urgent);
+    urgent-foreground:           var(background);
+    
+    active-background:           var(active);
+    active-foreground:           var(foreground);
+    
+    /* ── APLICACIÓN DE LA CORRECCIÓN DE COLOR PARA SELECCIÓN ── */
+    selected-normal-background:  var(selected);
+    selected-normal-foreground:  var(selected-text);
+    
+    selected-urgent-background:  var(urgent);
+    selected-urgent-foreground:  var(background);
+    
+    selected-active-background:  var(selected);
+    selected-active-foreground:  var(selected-text);
+    
+    alternate-normal-background: var(background);
+    alternate-normal-foreground: var(foreground);
+    
+    alternate-urgent-background: var(urgent);
+    alternate-urgent-foreground: var(background);
+    
+    alternate-active-background: var(active);
+    alternate-active-foreground: var(foreground);
+}
+
+/*****----- Main Window -----*****/
+window {
+    transparency:                "real";
+    location:                    south;
+    anchor:                      south;
+    fullscreen:                  false;
+    width:                       650px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      2px 2px 0px 2px solid;
+    border-radius:               10px 10px 0px 0px;
+    border-color:                @border-colour;
+    cursor:                      "default";
+    background-color:            @background-colour;
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     15px;
+    margin:                      0px;
+    padding:                     20px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @border-colour;
+    background-color:            transparent;
+    /* INVERSIÓN: Primero la lista de apps/comandos, al final el buscador inline */
+    children:                    [ "message", "listview", "inputbar" ];
+}
+
+/*****----- Inputbar (Contenedor de búsqueda + botones) -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     15px;
+    margin:                      0px;
+    padding:                     0px;
+    background-color:            transparent;
+    text-color:                  @foreground-colour;
+    orientation:                 horizontal;
+    children:                    [ "entry-box", "mode-switcher" ];
+}
+
+/* Caja secundaria para mantener el estilo visual del buscador */
+entry-box {
+    spacing:                     10px;
+    padding:                     8px 12px;
+    border-radius:               8px;
+    background-color:            @alternate-background;
+    text-color:                  inherit;
+    orientation:                 horizontal;
+    expand:                      true;
+    children:                    [ "textbox-prompt-colon", "entry" ];
+}
+
+prompt {
+    enabled:                     true;
+    background-color:            inherit;
+    text-color:                  inherit;
+}
+
+/* Icono NF de lupa al lado de la búsqueda */
+textbox-prompt-colon {
+    enabled:                     true;
+    padding:                     5px 0px;
+    expand:                      false;
+    str:                         " ";
+    background-color:            inherit;
+    text-color:                  inherit;
+}
+
+entry {
+    enabled:                     true;
+    padding:                     5px 0px;
+    background-color:            inherit;
+    text-color:                  inherit;
+    cursor:                      text;
+    placeholder:                 "Buscar...";
+    placeholder-color:           inherit;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       7;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   true;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                false;
+    fixed-columns:               true;
+    
+    spacing:                     5px;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @border-colour;
+    background-color:            transparent;
+    text-color:                  @foreground-colour;
+    cursor:                      "default";
+}
+
+scrollbar {
+    handle-width:                0px ;
+    handle-color:                @handle-colour;
+    border-radius:               10px;
+    background-color:            @alternate-background;
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    spacing:                     10px;
+    margin:                      0px;
+    padding:                     10px;
+    border:                      0px solid;
+    border-radius:               3px;
+    border-color:                @border-colour;
+    background-color:            transparent;
+    text-color:                  @foreground-colour;
+    cursor:                      pointer;
+}
+element normal.normal {
+    background-color:            var(normal-background);
+    text-color:                  var(normal-foreground);
+}
+element normal.urgent {
+    background-color:            var(urgent-background);
+    text-color:                  var(urgent-foreground);
+}
+element normal.active {
+    background-color:            var(active-background);
+    text-color:                  var(active-foreground);
+}
+element selected.normal {
+    background-color:            var(selected-normal-background);
+    text-color:                  var(selected-normal-foreground);
+}
+element selected.urgent {
+    background-color:            var(selected-urgent-background);
+    text-color:                  var(selected-urgent-foreground);
+}
+element selected.active {
+    background-color:            var(selected-active-background);
+    text-color:                  var(selected-active-foreground);
+}
+element alternate.normal {
+    background-color:            var(alternate-normal-background);
+    text-color:                  var(alternate-normal-foreground);
+}
+element alternate.urgent {
+    background-color:            var(alternate-urgent-background);
+    text-color:                  var(alternate-urgent-foreground);
+}
+element alternate.active {
+    background-color:            var(alternate-active-background);
+    text-color:                  var(alternate-active-foreground);
+}
+element-icon {
+    background-color:            transparent;
+    text-color:                  inherit;
+    size:                        24px;
+    cursor:                      inherit;
+}
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    highlight:                   inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}
+
+/*****----- Mode Switcher -----*****/
+mode-switcher{
+    enabled:                     true;
+    expand:                      false;
+    orientation:                 horizontal;
+    spacing:                     8px;
+    margin:                      0px;
+    padding:                     0px;
+    background-color:            transparent;
+    text-color:                  @foreground-colour;
+}
+button {
+    padding:                     0px 15px;
+    border:                      0px solid;
+    border-radius:               8px;
+    border-color:                @border-colour;
+    background-color:            @alternate-background;
+    text-color:                  inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+    cursor:                      pointer;
+}
+button selected {
+    background-color:            var(selected-normal-background);
+    text-color:                  var(selected-normal-foreground);
+}
+
+/*****----- Message -----*****/
+message {
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     0px;
+    background-color:            transparent;
+    text-color:                  @foreground-colour;
+}
+textbox {
+    padding:                     12px;
+    border-radius:               8px;
+    background-color:            @alternate-background;
+    text-color:                  @foreground-colour;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+    highlight:                   none;
+}
+error-message {
+    padding:                     10px;
+    border:                      2px solid;
+    border-radius:               8px;
+    border-color:                @border-colour;
+    background-color:            @background-colour;
+    text-color:                  @foreground-colour;
+}

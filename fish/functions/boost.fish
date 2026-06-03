@@ -1,0 +1,3 @@
+function boost --wraps='echo Activando modo boost && powerprofilesctl set performance && env DISPLAY=:0 nvidia-settings -a "[gpu:0]/GPUPowerMizerMode=1" && sudo sh -c "/usr/bin/nvidia-smi -pm 1 && /usr/bin/nvidia-smi -lgc 2000,2000"' --description 'alias boost=echo Activando modo boost && powerprofilesctl set performance && env DISPLAY=:0 nvidia-settings -a "[gpu:0]/GPUPowerMizerMode=1" && sudo sh -c "/usr/bin/nvidia-smi -pm 1 && /usr/bin/nvidia-smi -lgc 2000,2000"'
+    echo Activando modo boost && powerprofilesctl set performance && env DISPLAY=:0 nvidia-settings -a "[gpu:0]/GPUPowerMizerMode=1" && sudo sh -c "/usr/bin/nvidia-smi -pm 1 && /usr/bin/nvidia-smi -lgc 2000,2000" $argv
+end

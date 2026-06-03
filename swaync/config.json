@@ -1,0 +1,50 @@
+{
+  "$schema": "/etc/xdg/swaync/configSchema.json",
+  "positionX": "right",
+  "positionY": "bottom",
+  "control-center-positionX": "right",
+  "control-center-positionY": "bottom",
+  "control-center-margin-bottom": 10,
+  "control-center-margin-right": 10,
+  "control-center-width": 220,
+  "notification-window-width": 240,
+  "keyboard-shortcuts": true,
+  "image-visibility": "when-available",
+  "transition-time": 200,
+  "hide-on-clear": false,
+  "hide-on-action": true,
+  "script-fail-notify": true,
+  "widgets": [
+    "title",
+    "dnd",
+    "notifications",
+    "mpris",
+    "buttons-grid"
+  ],
+  "widget-config": {
+    "title": {
+      "text": "Notificaciones",
+      "clear-all-button": true,
+      "button-text": "󰎟"
+    },
+    "dnd": {
+      "text": "Silenciar"
+    },
+    "buttons-grid": {
+      "actions": [
+        {
+          "label": "󰐥",
+          "command": "systemctl poweroff"
+        },
+        {
+          "label": "󰑐",
+          "command": "systemctl reboot"
+        },
+        {
+          "label": "󰤄",
+          "command": "systemctl suspend"
+        }
+      ]
+    }
+  }
+}

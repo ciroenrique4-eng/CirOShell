@@ -1,0 +1,41 @@
+* {
+    /* ── Fondos y textos base ── */
+    background:                  #131318;
+    background-alt:              #1f1f25;
+    foreground:                  #e4e1e9;
+
+    /* ── Tu lógica invertida para la selección ── */
+    selected:                    #282a60; /* Fondo muy oscuro */
+    selected-text:               #c0c1ff;    /* Letras de color vivo */
+
+    /* ── Otros estados y utilidades ── */
+    active:                      #2a292f;
+    urgent:                      #ffb4ab;
+    border-colour:               #46464f;
+    handle-colour:               #c0c1ff;
+    
+    /* ── Mapeo clásico para Rofi ── */
+    normal-background:           var(background);
+    normal-foreground:           var(foreground);
+    urgent-background:           var(urgent);
+    urgent-foreground:           var(background);
+    active-background:           var(active);
+    active-foreground:           var(foreground);
+    
+    /* ── Aquí inyectamos tu lógica de selección ── */
+    selected-normal-background:  var(selected);
+    selected-normal-foreground:  var(selected-text);
+    
+    selected-urgent-background:  var(urgent);
+    selected-urgent-foreground:  var(background);
+    
+    selected-active-background:  var(selected);
+    selected-active-foreground:  var(selected-text);
+    
+    alternate-normal-background: var(background-alt);
+    alternate-normal-foreground: var(foreground);
+    alternate-urgent-background: var(urgent);
+    alternate-urgent-foreground: var(background);
+    alternate-active-background: var(active);
+    alternate-active-foreground: var(foreground);
+}

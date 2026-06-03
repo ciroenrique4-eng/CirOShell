@@ -1,0 +1,49 @@
+cursor            {{ colors.primary.default.hex }}
+cursor_text_color {{ colors.on_primary.default.hex }}
+
+foreground            {{ colors.on_surface.default.hex }}
+background            {{ colors.surface_container_lowest.default.hex }}
+selection_foreground  {{ colors.on_secondary.default.hex }}
+selection_background  {{ colors.secondary.default.hex }}
+url_color             {{ colors.secondary.default.hex }}
+
+#: black 000000 767676
+color0  {{ colors.surface.default.hex }}
+color8  {{ colors.surface_container_highest.default.hex }}
+#: red cc0403 f2201f
+color1  {{ base16.base08.default.hex | lighten: -20.0 }}
+color9  {{ base16.base08.default.hex | lighten: 10.0 }}
+#: green 19cb00 23fd00
+color2  {{ colors.secondary_fixed_dim.default.hex }}
+color10 {{ colors.secondary_fixed.default.hex }}
+#: yellow cecb00 fffd00
+color3  {{ colors.tertiary_fixed_dim.default.hex }}
+color11 {{ colors.tertiary_fixed.default.hex }}
+#: blue 0d73cc 1a8fff
+color4  {{ colors.on_primary_fixed_variant.default.hex }}
+color12 {{ colors.primary.default.hex }}
+#: magenta cb1ed1 fd28ff
+color5  {{ colors.on_secondary_fixed_variant.default.hex }}
+color13 {{ colors.secondary.default.hex }}
+#: cyan 0dcdcd 14ffff
+color6  {{ colors.tertiary_fixed_dim.default.hex }}
+color14 {{ colors.tertiary.default.hex }}
+#: white dddddd ffffff
+color7  {{ colors.on_surface_variant.default.hex }}
+color15 #ccccd2
+
+mark1_foreground {{ colors.on_primary_fixed.default.hex }}
+mark1_background {{ colors.primary_fixed.default.hex }}
+mark2_foreground {{ colors.on_secondary_fixed.default.hex }}
+mark2_background {{ colors.secondary_fixed.default.hex }}
+mark3_foreground {{ colors.on_tertiary_fixed.default.hex }}
+mark3_background {{ colors.tertiary_fixed.default.hex }}
+
+active_tab_foreground {{ colors.on_primary.default.hex }}
+active_tab_background {{ colors.primary.default.hex }}
+inactive_tab_foreground {{ colors.on_primary_container.default.hex }}
+inactive_tab_background {{ colors.primary_container.default.hex }}
+
+active_border_color {{ colors.primary.default.hex }}
+inactive_border_color {{ colors.on_primary.default.hex }}
+# bell_border_color #ff5a00

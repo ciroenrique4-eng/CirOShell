@@ -1,0 +1,8 @@
+/*
+ * Colores compartidos de Rofi.
+ * Reexporta la paleta dinámica generada por Matugen para que todos los
+ * temas (config.rasi, wallpapers.rasi, papeles.rasi, menu.rasi...) usen
+ * los mismos colores y se actualicen automáticamente con el wallpaper.
+ */
+
+@import "../colors/dinamico.rasi"
