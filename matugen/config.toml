@@ -6,8 +6,8 @@ command = "awww img --transition-type grow --transition-pos 0.5,0.5 --transition
 set = true
 
 [templates.hyprland]
-input_path  = "~/.config/hypr/scheme/matugen.conf.tpl"
-output_path = "~/.config/hypr/scheme/current.conf"
+input_path  = "~/.config/matugen/templates/hyprland-scheme.lua.tpl"
+output_path = "~/.config/hypr/scheme/current.lua"
 post_hook   = "hyprctl reload"
 
 [templates.kitty]
@@ -64,3 +64,11 @@ output_path = "~/.config/rofi/colors/dinamico.rasi"
 [templates.kdeglobals]
 input_path  = "~/.config/matugen/templates/kdeglobals.tpl"
 output_path = "~/.config/kdeglobals"
+
+# Esquema en JSON para los generadores que no son templates de Matugen
+# (Feishin, HyprFM, nvim, Obsidian, Starship, Steam, Zen). El post_hook los
+# lanza a todos; ver ~/.local/bin/ciroshell-schemes.
+[templates.scheme_json]
+input_path  = "~/.config/matugen/templates/scheme.json.tpl"
+output_path = "~/.local/state/ciroshell/scheme.json"
+post_hook   = "~/.local/bin/ciroshell-schemes"

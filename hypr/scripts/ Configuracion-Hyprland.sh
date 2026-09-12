@@ -16,13 +16,13 @@ get_icon() {
         *gestures*)        echo "󱕸" ;;
         *variables*)       echo "󰫧" ;;
         *scheme*|*colors*) echo "󰏘" ;;
-        *hyprland.conf*)   echo "󰣇" ;;
+        *hyprland.lua*)    echo "󰣇" ;;
         *)                 echo "󰈚" ;;
     esac
 }
 
 # Construir lista con formato "icono|ruta" usando | como separador
-LISTA=$(find "$HYPR_DIR" -name "*.conf" | \
+LISTA=$(find "$HYPR_DIR" -name "*.lua" | \
     sed "s|$HYPR_DIR/||" | \
     sort | \
     while IFS= read -r file; do

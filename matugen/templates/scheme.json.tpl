@@ -1,0 +1,96 @@
+{
+  "name": "dynamic",
+  "flavour": "default",
+  "mode": "{{mode}}",
+  "variant": "tonalspot",
+  "colours": {
+    "background": "{{colors.background.default.hex_stripped}}",
+    "onBackground": "{{colors.on_background.default.hex_stripped}}",
+
+    "surface": "{{colors.surface.default.hex_stripped}}",
+    "onSurface": "{{colors.on_surface.default.hex_stripped}}",
+    "surfaceDim": "{{colors.surface_dim.default.hex_stripped}}",
+    "surfaceBright": "{{colors.surface_bright.default.hex_stripped}}",
+    "surfaceVariant": "{{colors.surface_variant.default.hex_stripped}}",
+    "onSurfaceVariant": "{{colors.on_surface_variant.default.hex_stripped}}",
+    "surfaceTint": "{{colors.surface_tint.default.hex_stripped}}",
+
+    "surfaceContainerLowest": "{{colors.surface_container_lowest.default.hex_stripped}}",
+    "surfaceContainerLow": "{{colors.surface_container_low.default.hex_stripped}}",
+    "surfaceContainer": "{{colors.surface_container.default.hex_stripped}}",
+    "surfaceContainerHigh": "{{colors.surface_container_high.default.hex_stripped}}",
+    "surfaceContainerHighest": "{{colors.surface_container_highest.default.hex_stripped}}",
+
+    "inverseSurface": "{{colors.inverse_surface.default.hex_stripped}}",
+    "inverseOnSurface": "{{colors.inverse_on_surface.default.hex_stripped}}",
+    "inversePrimary": "{{colors.inverse_primary.default.hex_stripped}}",
+
+    "outline": "{{colors.outline.default.hex_stripped}}",
+    "outlineVariant": "{{colors.outline_variant.default.hex_stripped}}",
+    "shadow": "{{colors.shadow.default.hex_stripped}}",
+    "scrim": "{{colors.scrim.default.hex_stripped}}",
+
+    "primary": "{{colors.primary.default.hex_stripped}}",
+    "onPrimary": "{{colors.on_primary.default.hex_stripped}}",
+    "primaryContainer": "{{colors.primary_container.default.hex_stripped}}",
+    "onPrimaryContainer": "{{colors.on_primary_container.default.hex_stripped}}",
+    "primaryFixed": "{{colors.primary_fixed.default.hex_stripped}}",
+    "primaryFixedDim": "{{colors.primary_fixed_dim.default.hex_stripped}}",
+
+    "secondary": "{{colors.secondary.default.hex_stripped}}",
+    "onSecondary": "{{colors.on_secondary.default.hex_stripped}}",
+    "secondaryContainer": "{{colors.secondary_container.default.hex_stripped}}",
+    "onSecondaryContainer": "{{colors.on_secondary_container.default.hex_stripped}}",
+
+    "tertiary": "{{colors.tertiary.default.hex_stripped}}",
+    "onTertiary": "{{colors.on_tertiary.default.hex_stripped}}",
+    "tertiaryContainer": "{{colors.tertiary_container.default.hex_stripped}}",
+    "onTertiaryContainer": "{{colors.on_tertiary_container.default.hex_stripped}}",
+
+    "error": "{{colors.error.default.hex_stripped}}",
+    "onError": "{{colors.on_error.default.hex_stripped}}",
+    "errorContainer": "{{colors.error_container.default.hex_stripped}}",
+    "onErrorContainer": "{{colors.on_error_container.default.hex_stripped}}",
+
+    "primary_paletteKeyColor": "{{colors.source_color.default.hex_stripped}}",
+    "primaryPaletteKeyColor": "{{colors.source_color.default.hex_stripped}}",
+
+    "primaryDim": "{{colors.primary.default.hex_stripped | set_lightness: 45.0}}",
+    "secondaryDim": "{{colors.secondary.default.hex_stripped | set_lightness: 45.0}}",
+    "tertiaryDim": "{{colors.tertiary.default.hex_stripped | set_lightness: 45.0}}",
+    "errorDim": "{{colors.error.default.hex_stripped | set_lightness: 45.0}}",
+
+    "success": "{{colors.primary.default.hex_stripped | set_hue: 145.0}}",
+    "onSuccess": "{{colors.on_primary.default.hex_stripped}}",
+    "successContainer": "{{colors.primary_container.default.hex_stripped | set_hue: 145.0}}",
+    "onSuccessContainer": "{{colors.on_primary_container.default.hex_stripped | set_hue: 145.0}}",
+
+    "surface0": "{{colors.surface_container_low.default.hex_stripped}}",
+    "surface1": "{{colors.surface_container.default.hex_stripped}}",
+    "surface2": "{{colors.surface_container_high.default.hex_stripped}}",
+    "base": "{{colors.surface.default.hex_stripped}}",
+    "mantle": "{{colors.surface_container_low.default.hex_stripped}}",
+    "crust": "{{colors.surface_container_lowest.default.hex_stripped}}",
+    "text": "{{colors.on_surface.default.hex_stripped}}",
+    "subtext1": "{{colors.on_surface_variant.default.hex_stripped}}",
+    "subtext0": "{{colors.outline.default.hex_stripped}}",
+    "overlay2": "{{colors.outline.default.hex_stripped}}",
+    "overlay1": "{{colors.outline_variant.default.hex_stripped}}",
+    "overlay0": "{{colors.outline_variant.default.hex_stripped}}",
+
+    "rosewater": "{{colors.primary.default.hex_stripped | set_hue: 10.0}}",
+    "flamingo": "{{colors.primary.default.hex_stripped | set_hue: 0.0}}",
+    "pink": "{{colors.primary.default.hex_stripped | set_hue: 316.0}}",
+    "mauve": "{{colors.primary.default.hex_stripped | set_hue: 267.0}}",
+    "red": "{{colors.primary.default.hex_stripped | set_hue: 343.0}}",
+    "maroon": "{{colors.primary.default.hex_stripped | set_hue: 350.0}}",
+    "peach": "{{colors.primary.default.hex_stripped | set_hue: 22.0}}",
+    "yellow": "{{colors.primary.default.hex_stripped | set_hue: 41.0}}",
+    "green": "{{colors.primary.default.hex_stripped | set_hue: 115.0}}",
+    "teal": "{{colors.primary.default.hex_stripped | set_hue: 170.0}}",
+    "sky": "{{colors.primary.default.hex_stripped | set_hue: 189.0}}",
+    "sapphire": "{{colors.primary.default.hex_stripped | set_hue: 199.0}}",
+    "blue": "{{colors.primary.default.hex_stripped | set_hue: 217.0}}",
+    "lavender": "{{colors.primary.default.hex_stripped | set_hue: 232.0}}"
+  }
+}

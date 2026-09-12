@@ -1,0 +1,10 @@
+-- GPU: NVIDIA — compositor en dGPU (Reverse PRIME, mayor consumo)
+-- Generado por ~/.config/hypr/scripts/󰢮 GPU Mode.sh — no editar manualmente
+hl.env("GBM_BACKEND", "nvidia-drm")
+hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
+hl.env("LIBVA_DRIVER_NAME", "nvidia")
+hl.env("NVD_BACKEND", "direct")
+hl.env("__GL_GSYNC_ALLOWED", "1")
+hl.env("__GL_VRR_ALLOWED", "1")
+hl.env("WLR_NO_HARDWARE_CURSORS", "1")
+hl.env("WLR_DRM_DEVICES", "/dev/dri/card2")

@@ -4,11 +4,13 @@
 
 - **CPU:** Intel Core i5-13450HX (Raptor Lake-S, 13ª gen)
 - **iGPU:** Intel UHD Graphics (i915) — driver: `iris`
-- **dGPU:** NVIDIA GeForce RTX 4050 Laptop GPU — driver: `nvidia 610.43.02`
+- **dGPU:** NVIDIA GeForce RTX 4050 Laptop GPU — driver: `nvidia-open 615.71.09`
 - **RAM:** 16 GB
 - **Pantalla:** eDP-1, 1920×1080 @ 120Hz fijos (sin VRR/Adaptive Sync hardware)
 - **Kernel:** CachyOS (linux-cachyos)
-- **Compositor:** Hyprland 0.55.2 en Wayland (con Xwayland)
+- **Compositor:** Hyprland 0.56.2 en Wayland (con Xwayland)
+- **Formato de config:** Lua (`hyprland.lua` + `hyprland/*.lua`). La sintaxis `.conf`
+  antigua (`source =`, `bind =`, `windowrule =`) ya no se usa aquí.
 
 ## Arquitectura GPU (Optimus / PRIME)
 
@@ -50,54 +52,70 @@ Cuando se activa discrete-only desde BIOS, la pantalla se conecta directamente a
 
 ## Configuración relevante
 
-### env.conf — GPU/NVIDIA
+### env.lua — GPU/NVIDIA
 
-La sección GPU se gestiona dinámicamente mediante `env_gpu.conf` (no editar a mano):
+La sección GPU se gestiona dinámicamente mediante `env_gpu.lua` (no editar a mano):
 
-```ini
-# En env.conf:
-source = ~/.config/hypr/hyprland/env_gpu.conf
+```lua
+-- En env.lua. pcall: si el archivo aún no existe, la sesión arranca igual.
+pcall(require, "hyprland.env_gpu")
 ```
 
-El archivo `env_gpu.conf` lo escribe el script `scripts/󰢮 GPU Mode.sh`. Ejemplo del modo híbrido:
+El archivo `env_gpu.lua` lo escribe el script `scripts/󰢮 GPU Mode.sh`. Ejemplo del modo híbrido:
 
-```ini
-env = GBM_BACKEND, nvidia-drm
-env = __GLX_VENDOR_LIBRARY_NAME, nvidia
-env = LIBVA_DRIVER_NAME, nvidia
-env = NVD_BACKEND, direct          # mejor decodificación HW con ffmpeg/mpv
-env = __GL_GSYNC_ALLOWED, 1
-env = __GL_VRR_ALLOWED, 1
-env = WLR_NO_HARDWARE_CURSORS, 1   # evita bugs de cursor con NVIDIA en Wayland
-env = WLR_DRM_DEVICES, /dev/dri/card1   # card1=Intel, card2=NVIDIA
+```lua
+hl.env("GBM_BACKEND", "nvidia-drm")
+hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
+hl.env("LIBVA_DRIVER_NAME", "nvidia")
+hl.env("NVD_BACKEND", "direct")            -- mejor decodificación HW con ffmpeg/mpv
+hl.env("__GL_GSYNC_ALLOWED", "1")
+hl.env("__GL_VRR_ALLOWED", "1")
+hl.env("WLR_NO_HARDWARE_CURSORS", "1")     -- evita bugs de cursor con NVIDIA en Wayland
+hl.env("WLR_DRM_DEVICES", "/dev/dri/card1") -- card1=Intel, card2=NVIDIA
 ```
 
-> `__GL_GSYNC_ALLOWED` y `__GL_VRR_ALLOWED` aplican principalmente a X11/GLX, no a Wayland nativo. En Wayland el VRR lo controla `vrr` en misc.conf.
+> `__GL_GSYNC_ALLOWED` y `__GL_VRR_ALLOWED` aplican principalmente a X11/GLX, no a Wayland nativo. En Wayland el VRR lo controla `vrr` en `misc.lua`.
 
-### hyprland.conf — nivel raíz
+### hyprland.lua — nivel raíz
 
-```ini
-explicit_sync  = 2      # necesario para NVIDIA en Wayland
-unscale_layers = true
+El `.conf` viejo traía `explicit_sync = 2` y `unscale_layers = true` a nivel raíz.
+**Ninguna de las dos existe en Hyprland 0.56** (`hyprctl getoption` responde `no such
+option`), así que no se portaron: llevaban tiempo sin hacer nada.
+
+### misc.lua
+
+```lua
+misc = { vrr = 0 }                 -- 0=off, 1=siempre, 2=solo fullscreen
+render = { direct_scanout = 1 }    -- fullscreen solitario directo al plano del display
 ```
 
-### misc.conf
+La pantalla no tiene VRR hardware y con `vrr` activo parpadea → queda en `0`.
 
-```ini
-vrr = 2   # 0=off, 1=siempre, 2=solo fullscreen
+`direct_scanout` saca al compositor del camino cuando hay una única ventana
+fullscreen: medido, Hyprland pasa de 14.9% a 7.5% de CPU, de 23.1% a 0% de GPU y de
+9.0W a 3.4W. Requiere **fullscreen real**, no ventana sin bordes. Verificar con:
+
+```bash
+hyprctl monitors | grep -E "solitary|tearing|directScanout"
 ```
 
-La pantalla no tiene VRR hardware → Hyprland lo detecta y cae a 120Hz fijos. El valor `2` no hace daño.
+Si aparece `user settings` en los `*BlockedBy`, el flag está apagado. `missing
+candidate` o `windowed mode` es normal en escritorio: solo significa que no hay un
+fullscreen activo.
 
-### rules.conf — juegos
+### rules.lua — juegos
 
-```ini
-windowrule = opaque true,        match:class (steam_app_(default|[0-9]+))|gamescope
-windowrule = immediate true,     match:class (steam_app_(default|[0-9]+))|gamescope
-windowrule = idle_inhibit always, match:class (steam_app_(default|[0-9]+))|gamescope
+Las reglas van por **tags**: se etiquetan los matches y al final se define qué hace
+cada tag. Las definiciones (`create_tag`) tienen que ir **después** de todos los usos.
+
+```lua
+tagged_rule(game_tag, { "steam_app_[0-9]+", "steam_app_default", "gamescope" })
+-- ...
+create_tag(game_tag, { immediate = true, idle_inhibit = "always" })
 ```
 
-`immediate = true` permite tearing (frames sin esperar vblank). Requiere `allow_tearing = true` en `general.conf`, que ya está activo.
+`immediate = true` permite tearing (frames sin esperar vblank). Requiere
+`allow_tearing = true` en `general.lua`, que ya está activo.
 
 ## Problema de stutter en juegos
 
@@ -114,10 +132,20 @@ gamescope -W 1920 -H 1080 -r 120 -f -- %command%
 
 Gamescope puede usar DRM direct scanout desde NVIDIA, saltándose parte del overhead del compositor de Hyprland.
 
-## Cambios aplicados en esta sesión
+## Probar la config sin reiniciar la sesión
 
-| Archivo | Cambio |
-|---|---|
-| `hyprland/misc.conf` | `vrr = 0` → `vrr = 2` |
-| `hyprland/env.conf` | `__GL_*_ALLOWED` de 0 a 1, añadido `WLR_NO_HARDWARE_CURSORS=1` |
-| `/etc/udev/rules.d/99-nvidia-pcie.rules` | Mantener NVIDIA en PCIe active (Gen 4) |
+```bash
+cd ~/.config/hypr && lua test-config.lua
+```
+
+Carga todos los módulos con un `hl` simulado: atrapa errores de sintaxis, `require`
+rotos y nils dentro de los callbacks de los binds. **No** valida que los nombres de
+opciones existan en Hyprland — para eso, `hyprctl getoption <seccion>:<opcion>` y
+`hyprctl configerrors` después de un `hyprctl reload`.
+
+## Nota sobre el BIOS
+
+Ahora mismo **Advanced Optimus está desactivado en BIOS**: la pantalla va directa a la
+NVIDIA y todo (compositor incluido) corre por la dGPU. El consumo de ~1 GB de VRAM en
+reposo es esperado, no un leak. Toda la sección de PRIME de arriba aplica solo si se
+reactiva Optimus.

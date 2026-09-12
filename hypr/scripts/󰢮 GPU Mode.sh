@@ -7,7 +7,7 @@
 #
 # Requiere cerrar sesión para que el cambio de DRM device surta efecto.
 
-ENV_GPU="$HOME/.config/hypr/hyprland/env_gpu.conf"
+ENV_GPU="$HOME/.config/hypr/hyprland/env_gpu.lua"
 STATE_FILE="$HOME/.config/hypr/.gpu-mode"
 ROFI_THEME="$HOME/.config/rofi/menu.rasi"
 
@@ -18,42 +18,42 @@ get_mode() { cat "$STATE_FILE" 2>/dev/null || echo "hybrid"; }
 
 write_integrated() {
     cat > "$ENV_GPU" <<EOF
-# GPU: Integrada — solo Intel (NVIDIA en standby)
-# Generado por ~/.config/hypr/scripts/󰢮 GPU Mode.sh — no editar manualmente
-env = WLR_DRM_DEVICES, $INTEL_CARD
-env = WLR_NO_HARDWARE_CURSORS, 0
+-- GPU: Integrada — solo Intel (NVIDIA en standby)
+-- Generado por ~/.config/hypr/scripts/󰢮 GPU Mode.sh — no editar manualmente
+hl.env("WLR_DRM_DEVICES", "$INTEL_CARD")
+hl.env("WLR_NO_HARDWARE_CURSORS", "0")
 EOF
     echo "integrated" > "$STATE_FILE"
 }
 
 write_hybrid() {
     cat > "$ENV_GPU" <<EOF
-# GPU: Híbrida — Intel compositor + NVIDIA disponible para offload con prime-run
-# Generado por ~/.config/hypr/scripts/󰢮 GPU Mode.sh — no editar manualmente
-env = GBM_BACKEND, nvidia-drm
-env = __GLX_VENDOR_LIBRARY_NAME, nvidia
-env = LIBVA_DRIVER_NAME, nvidia
-env = NVD_BACKEND, direct
-env = __GL_GSYNC_ALLOWED, 1
-env = __GL_VRR_ALLOWED, 1
-env = WLR_NO_HARDWARE_CURSORS, 1
-env = WLR_DRM_DEVICES, $INTEL_CARD
+-- GPU: Híbrida — Intel compositor + NVIDIA disponible para offload con prime-run
+-- Generado por ~/.config/hypr/scripts/󰢮 GPU Mode.sh — no editar manualmente
+hl.env("GBM_BACKEND", "nvidia-drm")
+hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
+hl.env("LIBVA_DRIVER_NAME", "nvidia")
+hl.env("NVD_BACKEND", "direct")
+hl.env("__GL_GSYNC_ALLOWED", "1")
+hl.env("__GL_VRR_ALLOWED", "1")
+hl.env("WLR_NO_HARDWARE_CURSORS", "1")
+hl.env("WLR_DRM_DEVICES", "$INTEL_CARD")
 EOF
     echo "hybrid" > "$STATE_FILE"
 }
 
 write_nvidia() {
     cat > "$ENV_GPU" <<EOF
-# GPU: NVIDIA — compositor en dGPU (Reverse PRIME, mayor consumo)
-# Generado por ~/.config/hypr/scripts/󰢮 GPU Mode.sh — no editar manualmente
-env = GBM_BACKEND, nvidia-drm
-env = __GLX_VENDOR_LIBRARY_NAME, nvidia
-env = LIBVA_DRIVER_NAME, nvidia
-env = NVD_BACKEND, direct
-env = __GL_GSYNC_ALLOWED, 1
-env = __GL_VRR_ALLOWED, 1
-env = WLR_NO_HARDWARE_CURSORS, 1
-env = WLR_DRM_DEVICES, $NVIDIA_CARD
+-- GPU: NVIDIA — compositor en dGPU (Reverse PRIME, mayor consumo)
+-- Generado por ~/.config/hypr/scripts/󰢮 GPU Mode.sh — no editar manualmente
+hl.env("GBM_BACKEND", "nvidia-drm")
+hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
+hl.env("LIBVA_DRIVER_NAME", "nvidia")
+hl.env("NVD_BACKEND", "direct")
+hl.env("__GL_GSYNC_ALLOWED", "1")
+hl.env("__GL_VRR_ALLOWED", "1")
+hl.env("WLR_NO_HARDWARE_CURSORS", "1")
+hl.env("WLR_DRM_DEVICES", "$NVIDIA_CARD")
 EOF
     echo "nvidia" > "$STATE_FILE"
 }

@@ -15,8 +15,8 @@
 
 /* === Popups de Notificaciones === */
 .notification {
-    background: #1f1f25;
-    border: 1px solid #46464f;
+    background: #271d1c;
+    border: 1px solid #534341;
     border-radius: 12px;
     padding: 12px;
     margin: 0;
@@ -44,28 +44,28 @@
 }
 
 .notification-default-action:hover {
-    background: #2a292f;
+    background: #322826;
 }
 
 .summary {
     font-size: 13px;
     font-weight: bold;
-    color: #e4e1e9;
+    color: #f1dfdc;
 }
 
 .body {
     font-size: 12px;
-    color: #c7c5d0;
+    color: #d8c2be;
 }
 
 .app-name, .time {
     font-size: 11px;
-    color: #918f9a;
+    color: #a08c89;
 }
 
 .close-button {
     background: transparent;
-    color: #c7c5d0;
+    color: #d8c2be;
     border-radius: 8px;
     border: none;
     padding: 4px 6px;
@@ -79,8 +79,8 @@
 }
 
 .notification-action {
-    background: #454559;
-    color: #e2e0f9;
+    background: #5d3f3b;
+    color: #ffdad4;
     border-radius: 8px;
     border: none;
     margin: 4px 2px;
@@ -90,14 +90,14 @@
 }
 
 .notification-action:hover {
-    background: #c0c1ff;
-    color: #282a60;
+    background: #ffb4a8;
+    color: #561e16;
 }
 
 /* === Control Center === */
 .control-center {
-    background: #131318;
-    border: 1px solid #46464f;
+    background: #1a1110;
+    border: 1px solid #534341;
     border-radius: 14px;
     padding: 6px;
     box-shadow: 0 4px 16px rgba(0,0,0,0.4);
@@ -114,25 +114,25 @@ scrollbar {
 }
 
 scrollbar slider {
-    background: #46464f;
+    background: #534341;
     border-radius: 4px;
     min-height: 40px;
 }
 
 scrollbar slider:hover {
-    background: #918f9a;
+    background: #a08c89;
 }
 
 .widget-title {
-    color: #e4e1e9;
+    color: #f1dfdc;
     font-size: 13px;
     font-weight: bold;
     margin: 8px 6px 4px 6px;
 }
 
 .widget-title > button {
-    background: #1f1f25;
-    color: #c7c5d0;
+    background: #271d1c;
+    color: #d8c2be;
     border-radius: 8px;
     border: none;
     font-size: 11px;
@@ -149,25 +149,25 @@ scrollbar slider:hover {
 .widget-dnd {
     margin: 4px 6px;
     font-size: 12px;
-    color: #e4e1e9;
+    color: #f1dfdc;
 }
 
 .widget-dnd > switch {
-    background: #35343a;
+    background: #3d3230;
     border-radius: 12px;
-    border: 1px solid #918f9a;
+    border: 1px solid #a08c89;
     min-height: 24px;
     min-width: 44px;
     transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .widget-dnd > switch:checked {
-    background: #c0c1ff;
-    border-color: #c0c1ff;
+    background: #ffb4a8;
+    border-color: #ffb4a8;
 }
 
 .widget-dnd > switch slider {
-    background: #918f9a;
+    background: #a08c89;
     border-radius: 10px;
     min-width: 16px;
     min-height: 16px;
@@ -175,33 +175,33 @@ scrollbar slider:hover {
 }
 
 .widget-dnd > switch:checked slider {
-    background: #282a60;
+    background: #561e16;
 }
 
 /* === Reproductor MPRIS === */
 .widget-mpris {
-    background: #2a292f;
+    background: #322826;
     border-radius: 10px;
     margin: 6px;
     padding: 8px;
-    color: #e4e1e9;
+    color: #f1dfdc;
 }
 
 .widget-mpris-title {
     font-weight: bold;
     font-size: 12px;
-    color: #e4e1e9;
+    color: #f1dfdc;
 }
 
 .widget-mpris-subtitle {
     font-size: 11px;
-    color: #c7c5d0;
+    color: #d8c2be;
 }
 
 .widget-mpris > box > button,
 .widget-mpris > box > box > button {
     background: transparent;
-    color: #c7c5d0;
+    color: #d8c2be;
     border: none;
     border-radius: 8px;
     padding: 4px 8px;
@@ -211,13 +211,13 @@ scrollbar slider:hover {
 
 .widget-mpris > box > button:hover,
 .widget-mpris > box > box > button:hover {
-    background: #3f4178;
-    color: #e1e0ff;
+    background: #73342a;
+    color: #ffdad4;
 }
 
 /* === Botones de Energía (Buttons Grid) === */
 .widget-buttons-grid {
-    background: #1f1f25;
+    background: #271d1c;
     border-radius: 12px;
     margin: 6px;
     padding: 4px;
@@ -225,7 +225,7 @@ scrollbar slider:hover {
 
 .widget-buttons-grid > flowbox > flowboxchild > button {
     background: transparent;
-    color: #e4e1e9;
+    color: #f1dfdc;
     border-radius: 8px;
     padding: 6px 12px;
     font-size: 16px;
@@ -233,8 +233,8 @@ scrollbar slider:hover {
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button:hover {
-    background: #3f4178;
-    color: #e1e0ff;
+    background: #73342a;
+    color: #ffdad4;
 }
 
 /* === Urgencia === */
