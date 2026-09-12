@@ -3,28 +3,28 @@
    Generado automáticamente por matugen — no editar a mano
    ───────────────────────────────────────────────────────────── */
 
-@define-color base             #1a1110;
-@define-color base_dim         #1a1110;
-@define-color surface          #271d1c;
-@define-color surface_low      #231918;
-@define-color surface_high     #322826;
+@define-color base             #0f1416;
+@define-color base_dim         #0f1416;
+@define-color surface          #1b2023;
+@define-color surface_low      #171c1f;
+@define-color surface_high     #252b2d;
 
-@define-color primary          #ffb4a8;
-@define-color on_primary       #561e16;
-@define-color primary_container     #73342a;
-@define-color on_primary_container  #ffdad4;
+@define-color primary          #88d1ec;
+@define-color on_primary       #003543;
+@define-color primary_container     #004e61;
+@define-color on_primary_container  #b7eaff;
 
-@define-color secondary        #e7bdb6;
-@define-color on_secondary     #442925;
-@define-color secondary_container   #5d3f3b;
+@define-color secondary        #b3cad4;
+@define-color on_secondary     #1e333b;
+@define-color secondary_container   #344a52;
 
-@define-color tertiary         #dec48c;
-@define-color on_tertiary      #3e2e04;
+@define-color tertiary         #c3c3eb;
+@define-color on_tertiary      #2c2e4d;
 
-@define-color text             #f1dfdc;
-@define-color text_muted       #d8c2be;
-@define-color outline          #a08c89;
-@define-color outline_variant  #534341;
+@define-color text             #dee3e6;
+@define-color text_muted       #bfc8cc;
+@define-color outline          #8a9296;
+@define-color outline_variant  #40484c;
 
 @define-color error            #ffb4ab;
 @define-color on_error         #690005;

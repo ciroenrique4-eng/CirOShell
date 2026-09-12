@@ -23,13 +23,11 @@ FUENTE_POR_DEFECTO = "/usr/share/fonts/TTF/FiraCodeNerdFont-Regular.ttf"
 # Claves cuyo valor es texto que se dibuja en la barra.
 CLAVES_CON_ICONO = ("format", "format-icons", "window-rewrite", "window-rewrite-default")
 
-# Los únicos iconos que están vacíos a propósito. En workspaces, {icon} se anula
-# en los estados que ya dibujan {windows}: el estado se distingue por color, no
-# por glifo. Cualquier otro vacío es un glifo que se perdió al editar.
+# El único icono vacío a propósito: en un workspace ocupado, {icon} se anula
+# para dejar sitio a {windows}. Cualquier otro vacío es un glifo que se perdió
+# al editar.
 VACIOS_INTENCIONALES = {
     "hyprland/workspaces.format-icons.default",
-    "hyprland/workspaces.format-icons.active",
-    "hyprland/workspaces.format-icons.urgent",
 }
 
 

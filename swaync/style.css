@@ -39,7 +39,7 @@
 
 /* ── Tarjeta ────────────────────────────────────────────────────────────── */
 .notification-row .notification-background .notification {
-    background: #271d1c;
+    background: #1b2023;
     border: none;
     border-radius: 12px;
     padding: 0;
@@ -62,7 +62,7 @@
 }
 
 .notification-row .notification-background .notification .notification-default-action:hover {
-    background: #322826;
+    background: #252b2d;
 }
 
 /* Solo redondear abajo cuando no hay botones de acción debajo. */
@@ -80,18 +80,18 @@
 .notification-row .notification-background .notification .notification-default-action .notification-content .text-box .summary {
     font-size: 13px;
     font-weight: 600;
-    color: #f1dfdc;
+    color: #dee3e6;
 }
 
 .notification-row .notification-background .notification .notification-default-action .notification-content .text-box .body {
     font-size: 12px;
-    color: #d8c2be;
+    color: #bfc8cc;
 }
 
 /* La hora es un metadato: presente, pero fuera del camino. */
 .notification-row .notification-background .notification .notification-default-action .notification-content .text-box .time {
     font-size: 10px;
-    color: #a08c89;
+    color: #8a9296;
     margin-right: 2px;
 }
 
@@ -118,19 +118,19 @@
 }
 
 .notification-row .notification-background .notification .notification-default-action .notification-content progressbar {
-    background: #140c0b;
+    background: #0a0f11;
     border-radius: 4px;
 }
 
 .notification-row .notification-background .notification .notification-default-action .notification-content progressbar progress {
-    background: #ffb4a8;
+    background: #88d1ec;
     border-radius: 4px;
 }
 
 /* ── Cerrar: invisible hasta que hace falta ─────────────────────────────── */
 .close-button {
     background: transparent;
-    color: #a08c89;
+    color: #8a9296;
     border: none;
     border-radius: 8px;
     padding: 2px 6px;
@@ -152,8 +152,8 @@
 
 /* ── Acciones ───────────────────────────────────────────────────────────── */
 .notification-row .notification-background .notification .notification-action {
-    background: #322826;
-    color: #f1dfdc;
+    background: #252b2d;
+    color: #dee3e6;
     border: none;
     border-radius: 8px;
     margin: 0 4px 8px 4px;
@@ -171,21 +171,21 @@
 }
 
 .notification-row .notification-background .notification .notification-action:hover {
-    background: #ffb4a8;
-    color: #561e16;
+    background: #88d1ec;
+    color: #003543;
 }
 
 .notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-entry {
-    background: #140c0b;
-    color: #f1dfdc;
-    border: 1px solid #534341;
+    background: #0a0f11;
+    color: #dee3e6;
+    border: 1px solid #40484c;
     border-radius: 8px;
     padding: 4px 8px;
 }
 
 .notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-button {
     background: transparent;
-    color: #ffb4a8;
+    color: #88d1ec;
     border: none;
     border-radius: 8px;
     margin-left: 4px;
@@ -198,7 +198,7 @@
    ═══════════════════════════════════════════════════════════════════════ */
 
 .control-center {
-    background: #1a1110;
+    background: #0f1416;
     border: none;
     border-radius: 16px;
     padding: 4px 0 10px 0;
@@ -210,7 +210,7 @@
 }
 
 .control-center .control-center-list-placeholder {
-    color: #534341;
+    color: #40484c;
     font-size: 12px;
 }
 
@@ -222,7 +222,7 @@
 
 /* ── Cabecera ───────────────────────────────────────────────────────────── */
 .widget-title > label {
-    color: #f1dfdc;
+    color: #dee3e6;
     font-size: 15px;
     font-weight: 600;
     margin: 14px 4px 8px 16px;
@@ -230,7 +230,7 @@
 
 .widget-title > button {
     background: transparent;
-    color: #a08c89;
+    color: #8a9296;
     border: none;
     border-radius: 8px;
     font-size: 11px;
@@ -247,13 +247,13 @@
 
 /* ── No molestar ────────────────────────────────────────────────────────── */
 .widget-dnd label {
-    color: #d8c2be;
+    color: #bfc8cc;
     font-size: 12px;
     margin: 2px 4px 10px 16px;
 }
 
 .widget-dnd switch {
-    background: #322826;
+    background: #252b2d;
     border: none;
     border-radius: 12px;
     margin: 2px 16px 10px 4px;
@@ -263,11 +263,11 @@
 }
 
 .widget-dnd switch:checked {
-    background: #ffb4a8;
+    background: #88d1ec;
 }
 
 .widget-dnd switch slider {
-    background: #a08c89;
+    background: #8a9296;
     border-radius: 10px;
     min-width: 16px;
     min-height: 16px;
@@ -275,12 +275,12 @@
 }
 
 .widget-dnd switch:checked slider {
-    background: #561e16;
+    background: #003543;
 }
 
 /* ── Reproductor ────────────────────────────────────────────────────────── */
 .widget-mpris {
-    background: #271d1c;
+    background: #1b2023;
     border-radius: 12px;
     margin: 4px 10px 10px 10px;
     padding: 6px;
@@ -299,24 +299,24 @@
 .widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-title {
     font-size: 13px;
     font-weight: 600;
-    color: #f1dfdc;
+    color: #dee3e6;
 }
 
 .widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-subtitle {
     font-size: 11px;
-    color: #d8c2be;
+    color: #bfc8cc;
 }
 
 .widget-mpris .widget-mpris-player .mpris-overlay > box > button {
     background: transparent;
     border: none;
     border-radius: 8px;
-    color: #d8c2be;
+    color: #bfc8cc;
 }
 
 .widget-mpris .widget-mpris-player .mpris-overlay > box > button:hover {
-    background: #322826;
-    color: #f1dfdc;
+    background: #252b2d;
+    color: #dee3e6;
 }
 
 /* ── Scrollbar ──────────────────────────────────────────────────────────── */
@@ -326,11 +326,11 @@ scrollbar {
 }
 
 scrollbar slider {
-    background: #534341;
+    background: #40484c;
     border-radius: 4px;
     min-height: 40px;
 }
 
 scrollbar slider:hover {
-    background: #a08c89;
+    background: #8a9296;
 }

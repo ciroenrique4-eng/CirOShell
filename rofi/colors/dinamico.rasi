@@ -1,18 +1,18 @@
 * {
     /* ── Fondos y textos base ── */
-    background:                  #1a1110;
-    background-alt:              #271d1c;
-    foreground:                  #f1dfdc;
+    background:                  #0f1416;
+    background-alt:              #1b2023;
+    foreground:                  #dee3e6;
 
     /* ── Tu lógica invertida para la selección ── */
-    selected:                    #561e16; /* Fondo muy oscuro */
-    selected-text:               #ffb4a8;    /* Letras de color vivo */
+    selected:                    #003543; /* Fondo muy oscuro */
+    selected-text:               #88d1ec;    /* Letras de color vivo */
 
     /* ── Otros estados y utilidades ── */
-    active:                      #322826;
+    active:                      #252b2d;
     urgent:                      #ffb4ab;
-    border-colour:               #534341;
-    handle-colour:               #ffb4a8;
+    border-colour:               #40484c;
+    handle-colour:               #88d1ec;
     
     /* ── Mapeo clásico para Rofi ── */
     normal-background:           var(background);

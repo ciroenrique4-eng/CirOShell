@@ -19,7 +19,6 @@
 
   "modules-left": [
     "custom/launcher",
-    "custom/scripts",
     "hyprland/workspaces"
   ],
 
@@ -43,28 +42,27 @@
   // ─── Acciones ─────────────────────────────────────────────────────────────
   "custom/launcher": {
     "format": "",
-    "tooltip-format": "Aplicaciones  ·  Super",
-    "on-click": "pkill rofi || rofi -show drun"
+    "tooltip-format": "Aplicaciones  ·  Super\nScripts  ·  clic derecho o Super + O",
+    "on-click": "pkill rofi || rofi -show drun",
+    "on-click-right": "pkill rofi || rofi -show myscripts"
   },
 
-  "custom/scripts": {
-    "format": "",
-    "tooltip-format": "Scripts  ·  Super + O",
-    "on-click": "pkill rofi || rofi -show myscripts"
-  },
 
   // ─── Workspaces ───────────────────────────────────────────────────────────
   // {icon} solo dibuja algo en los vacíos (un punto); en los ocupados se ve
   // {windows}, que son los iconos de las apps que hay dentro.
+  //
+  // No definir "active" ni "urgent" es deliberado: waybar los consulta ANTES
+  // que "empty", así que un workspace activo y vacío se quedaba en blanco.
+  // Sin esas claves cae en "empty" y muestra el punto; el color del CSS ya
+  // distingue el estado.
   "hyprland/workspaces": {
     "disable-scroll": false,
     "all-outputs": true,
     "format": "{icon}{windows}",
     "format-icons": {
       "default": "",
-      "empty": "",
-      "active": "",
-      "urgent": ""
+      "empty": ""
     },
     "persistent-workspaces": { "*": [1, 2, 3, 4, 5] },
     "format-window-separator": "  ",
@@ -96,10 +94,14 @@
   // initialTitle en vez de title: el nombre de la app ("Zen Browser") en lugar
   // del título completo de la pestaña, que cambia todo el rato y baila.
   "hyprland/window": {
-    "format": "  {initialTitle}",
+    "format": "{initialTitle}",
     "separate-outputs": true,
     "max-length": 60,
-    "tooltip-format": "{title}"
+    "tooltip-format": "{title}",
+    "rewrite": {
+      "^$": "󰍹  Desktop :3",
+      "^(.+)$": "  $1"
+    }
   },
 
   // ─── Reproductor ──────────────────────────────────────────────────────────

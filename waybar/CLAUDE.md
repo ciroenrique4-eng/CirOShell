@@ -18,15 +18,29 @@ fuera del BMP y **sí** sobreviven la edición normal.
 ```
 
 Recorre `format`, `format-icons` y `window-rewrite` de `config.jsonc` y falla si un
-icono quedó vacío o si el glifo no existe en la fuente de `style.css`. Los tres
-vacíos que son intencionales están listados en `VACIOS_INTENCIONALES` dentro del
-script: en workspaces, `{icon}` se anula en los estados que ya dibujan `{windows}`.
+icono quedó vacío o si el glifo no existe en la fuente de `style.css`. El único
+vacío intencional está listado en `VACIOS_INTENCIONALES` dentro del script: en
+workspaces, `{icon}` se anula en `default` para dejar sitio a `{windows}`.
 
 Para ver los codepoints que hay ahora mismo en un archivo:
 
 ```bash
 python3 -c "import sys; print(' '.join(f'U+{ord(c):05X}' for c in open(sys.argv[1]).read() if ord(c)>0x2000))" config.jsonc
 ```
+
+### Editar un icono sin perderlo
+
+Escribirlo por codepoint, nunca pegando el carácter:
+
+```python
+p = pathlib.Path("config.jsonc"); s = p.read_text()
+s = s.replace('"class<kitty>": "X"', '"class<kitty>": "%s"' % chr(0xE795))
+p.write_text(s)
+```
+
+Lo mismo vale para los patrones de búsqueda: un `replace()` cuyo texto a buscar
+lleve un glifo pegado no encuentra nada y el cambio se pierde sin avisar. Buscar
+por la parte ASCII de la línea, o con `re.sub` y `"[^"]*"` para saltarse el glifo.
 
 ### Buscar el codepoint de un glifo por nombre
 
@@ -45,18 +59,30 @@ print(hex(rev["dev-terminal"]))   # 0xe795
 ## Diseño: taskbar, no isla flotante
 
 `height: 40`, sin `margin-*` ni `border-radius` en `window#waybar`: la barra es una
-franja pegada al borde superior, a ancho completo.
+franja pegada al borde inferior, a ancho completo.
 
 La regla del CSS es **casi todo plano**. El color se reserva para lo que hay que
 mirar: el workspace activo, el reloj y los estados de alerta. Si todos los módulos
 llevan fondo, ninguno destaca.
 
-- **Izquierda:** launcher, menú de scripts, workspaces.
+- **Izquierda:** logo de la distro y workspaces. El logo es el lanzador
+  (`rofi -show drun`) y lleva el menú de scripts en **clic derecho**; no hay un
+  segundo botón, sería el mismo lanzador dos veces.
+
   Los workspaces usan `format: "{icon}{windows}"` — los ocupados muestran los iconos
   de sus apps (vía `window-rewrite`), los vacíos un punto. El activo es el único con
   fondo.
+
+  **`format-icons` no define `active` ni `urgent` a propósito.** waybar los consulta
+  *antes* que `empty`, así que con un `"active": ""` (vacío, para dejar sitio a
+  `{windows}`) un workspace activo y sin ventanas se quedaba en blanco. Sin esas
+  claves, el activo con ventanas cae en `default` y el activo vacío en `empty`; el
+  estado ya se distingue por el fondo que le da el CSS.
 - **Centro:** `hyprland/window` con `{initialTitle}` (el nombre de la app, "Zen
   Browser") en vez de `{title}`, que cambia con cada pestaña y hace bailar la barra.
+  El `rewrite` resuelve los dos casos: `"^$"` para cuando no hay nada enfocado
+  (queda "Desktop :3") y `"^(.+)$"` para anteponer el icono de ventana al resto.
+  Sin la primera regla el módulo dejaba el icono suelto, sin texto.
 - **Derecha:** reproductor, inhibidor, notificaciones, reloj (el único pill fijo),
   teclado, bluetooth, red, perfil de energía, batería, apagar.
 
