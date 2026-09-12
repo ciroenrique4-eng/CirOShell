@@ -13,11 +13,6 @@
     urgent:                      #ffb4ab;
     border-colour:               #534341;
     handle-colour:               #ffb4a8;
-
-    /* ── Extras para los temas ── */
-    accent:                      #ffb4a8;   /* barra de selección */
-    foreground-dim:              #d8c2be; /* texto secundario */
-    surface-high:                #322826; /* hover */
     
     /* ── Mapeo clásico para Rofi ── */
     normal-background:           var(background);

@@ -13,11 +13,6 @@
     urgent:                      {{colors.error.default.hex}};
     border-colour:               {{colors.outline_variant.default.hex}};
     handle-colour:               {{colors.primary.default.hex}};
-
-    /* ── Extras para los temas ── */
-    accent:                      {{colors.primary.default.hex}};   /* barra de selección */
-    foreground-dim:              {{colors.on_surface_variant.default.hex}}; /* texto secundario */
-    surface-high:                {{colors.surface_container_high.default.hex}}; /* hover */
     
     /* ── Mapeo clásico para Rofi ── */
     normal-background:           var(background);

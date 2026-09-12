@@ -4,8 +4,8 @@
    NO EDITAR ~/.config/swaync/style.css: se sobrescribe en cada wallpaper.
 
    Criterio: una notificación es una interrupción. Que se lea de un vistazo y
-   desaparezca. Nada de bordes, cajas dentro de cajas ni sombras duras: una
-   superficie, una franja de acento y jerarquía tipográfica.
+   desaparezca. Nada de bordes, acentos ni cajas dentro de cajas: una sola
+   superficie y jerarquía tipográfica.
 
    ⚠️ SELECTORES LARGOS A PROPÓSITO. El tema por defecto de swaync
    (/etc/xdg/swaync/style.css) escribe sus reglas con cadenas de tres y cinco
@@ -41,23 +41,16 @@
 .notification-row .notification-background .notification {
     background: #{{colors.surface_container.default.hex_stripped}};
     border: none;
-    /* Franja de acento a la izquierda: identifica la tarjeta sin encerrarla. */
-    border-left: 3px solid #{{colors.primary.default.hex_stripped}};
     border-radius: 12px;
     padding: 0;
     margin: 6px 10px 0 10px;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.30);
 }
 
-/* Crítica: además de la franja, el fondo se tiñe. En paletas cálidas `error`
-   y `primary` salen casi iguales, así que la franja sola no distingue nada. */
+/* Crítica: se distingue tiñendo el fondo. Un acento de color no serviría — en
+   paletas cálidas `error` y `primary` salen casi idénticos. */
 .notification-row .notification-background .notification.critical {
     background: #{{colors.error_container.default.hex_stripped}};
-    border-left-color: #{{colors.error.default.hex_stripped}};
-}
-
-.notification-row .notification-background .notification.low {
-    border-left-color: #{{colors.outline_variant.default.hex_stripped}};
 }
 
 .notification-row .notification-background .notification .notification-default-action {

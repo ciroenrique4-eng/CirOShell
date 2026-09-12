@@ -2,7 +2,7 @@
 //
 // Tres zonas: acciones + workspaces a la izquierda, ventana activa al centro,
 // estado del sistema a la derecha. Sin márgenes ni esquinas redondeadas: la
-// barra es una franja pegada al borde, no una isla flotante.
+// barra es una franja pegada al borde inferior, no una isla flotante.
 //
 // NOTA SOBRE LOS ICONOS: los glifos del rango Private Use Area del BMP
 // (U+E000–U+F8FF: los iconos de Devicons, Font Awesome, Octicons…) van
@@ -13,7 +13,7 @@
 // JSON solo admite \uXXXX de 4 dígitos, así que esos sí van literales.
 {
   "layer": "top",
-  "position": "top",
+  "position": "bottom",
   "height": 40,
   "spacing": 0,
 

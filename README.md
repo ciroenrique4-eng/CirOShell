@@ -68,6 +68,28 @@ ln -sf /ruta/a/tu/fondo.jpg ~/.config/hypr/wallpaper.jpg
 
 Después, cerrar sesión y volver a entrar para que Hyprland cargue la config.
 
+## Desinstalación
+
+```bash
+./uninstall.sh                  # symlinks + respaldos + archivos generados
+./uninstall.sh --dry-run        # muestra lo que haría, sin tocar nada
+./uninstall.sh --deps           # además desinstala waybar, rofi, swaync, matugen y awww
+./uninstall.sh --keep-generated # deja los archivos generados donde están
+```
+
+Quita los symlinks que apunten **a este repositorio** (un enlace a otra cosa se
+deja tal cual) y restaura el respaldo `.bak-<fecha>` más reciente si lo hay.
+También borra lo que Matugen escribió en la config de otras apps, leyendo los
+destinos del propio `matugen/config.toml` para no tener la lista duplicada.
+
+No borra el repositorio, no toca `hyprland`/`kitty`/`fish`/`micro` —sirven con
+cualquier configuración— y deja en su sitio los archivos que Matugen sobrescribe
+enteros pero que seguramente ya existían (`kdeglobals`, la config de VS Code):
+los lista al terminar para que decidas.
+
+> Si te quedás sin `~/.config/hypr`, la sesión no arranca. Enlazá otra config
+> antes de salir; el script avisa.
+
 ## Notas
 
 - **Hyprland usa la sintaxis Lua** (`hypr/hyprland.lua` + `hypr/hyprland/*.lua`),
