@@ -1,95 +1,246 @@
 @import "colors.css";
 
+/* ─────────────────────────────────────────────────────────────────────────
+   Taskbar minimal. La regla es: casi todo plano, y el color se reserva para
+   lo que hay que mirar — el workspace activo, el reloj y los estados de
+   alerta. Si todo lleva fondo, nada destaca.
+   ───────────────────────────────────────────────────────────────────────── */
+
 * {
   border: none;
   border-radius: 0;
   font-family: "FiraCode Nerd Font", "Noto Sans", sans-serif;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
   min-height: 0;
+  /* Sin esto, GTK deja un halo claro al pasar el ratón por cada módulo. */
+  box-shadow: none;
+  text-shadow: none;
 }
 
 window#waybar {
   background: @base;
   color: @text;
-  border-radius: 12px;
 }
 
-.modules-left,
-.modules-center,
-.modules-right {
-  margin: 3px 6px;
+window#waybar.hidden {
+  opacity: 0.2;
 }
 
-/* ── Módulos base ─────────────────────────────────────────────── */
-#workspaces,
+tooltip {
+  background: @surface;
+  color: @text;
+  border: 1px solid @outline_variant;
+  border-radius: 10px;
+}
+
+tooltip label {
+  color: @text;
+  padding: 2px;
+}
+
+/* ── Módulos: plano por defecto ──────────────────────────────────────────
+   El padding va aquí y no en `spacing`, para que el área de clic llegue
+   hasta el borde de la barra en vez de ser solo el glifo.               */
+#custom-launcher,
+#custom-scripts,
 #custom-mpris,
+#idle_inhibitor,
+#custom-notifications,
+#language,
+#bluetooth,
 #network,
 #power-profiles-daemon,
 #battery,
-#clock {
+#custom-power,
+#window {
+  padding: 0 8px;
+  color: @text_muted;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+/* ── Acciones (izquierda) ────────────────────────────────────────────── */
+#custom-launcher {
+  color: @primary;
+  font-size: 17px;
+  padding-left: 14px;
+  padding-right: 10px;
+}
+
+#custom-scripts {
+  font-size: 15px;
+  padding-right: 12px;
+}
+
+#custom-launcher:hover,
+#custom-scripts:hover {
+  color: @primary;
+  background: @surface;
+}
+
+/* ── Workspaces ──────────────────────────────────────────────────────────
+   Los ocupados muestran los iconos de sus ventanas; los vacíos, un punto.
+   El activo es el único con fondo.                                       */
+#workspaces {
+  padding: 0;
+  margin: 0 4px;
+}
+
+#workspaces button {
+  padding: 0 9px;
+  margin: 5px 2px;
+  min-width: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: @outline;
+  font-size: 14px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* Punto pequeño y apagado: presente, pero sin pedir atención. */
+#workspaces button.empty {
+  color: @outline_variant;
+  font-size: 8px;
+  padding: 0 7px;
+}
+
+#workspaces button:hover {
   background: @surface;
   color: @text;
-  padding: 4px 12px;
-  border-radius: 8px;
-  margin: 3px 2px;
-  transition: background 0.2s ease, color 0.2s ease;
 }
 
-/* ── Workspaces ───────────────────────────────────────────────── */
-#workspaces {
-  padding: 4px 6px;
+#workspaces button.active {
+  background: @primary_container;
+  color: @on_primary_container;
+  padding: 0 12px;
 }
-#workspaces button {
-  background: transparent;
-  color: @text_muted;
-  padding: 0 6px;
-  border-radius: 6px;
-  transition: background 0.15s ease, color 0.15s ease;
-  min-width: 0;
-}
-#workspaces button:hover  { background: @surface_high; color: @text; }
-#workspaces button.active { background: @primary_container; color: @on_primary_container; }
-#workspaces button.urgent { background: @error; color: @on_error; }
 
-/* ── Reproductor ──────────────────────────────────────────────── */
-#custom-mpris         { color: @secondary; }
-#custom-mpris.paused  { color: @text_muted; font-style: italic; }
-#custom-mpris.stopped {            /* sin reproductor: oculta el módulo */
+#workspaces button.urgent {
+  background: @error;
+  color: @on_error;
+}
+
+/* ── Ventana activa (centro) ─────────────────────────────────────────── */
+#window {
+  color: @text;
+  font-weight: 600;
+}
+
+/* Sin ventana enfocada el módulo se queda vacío: que no deje hueco. */
+window#waybar.empty #window {
   background: transparent;
   padding: 0;
   margin: 0;
 }
 
-/* ── Red ──────────────────────────────────────────────────────── */
-#network              { color: @text; }
-#network.disconnected { color: @error; opacity: 0.7; }
-
-/* ── Perfil de energía ────────────────────────────────────────── */
-#power-profiles-daemon             { color: @text; }
-#power-profiles-daemon.performance { color: @tertiary; }
-#power-profiles-daemon.power-saver { color: @secondary; }
-
-/* ── Batería ──────────────────────────────────────────────────── */
-#battery                            { color: @text; }
-#battery.charging, #battery.plugged { color: @primary; }
-#battery.warning:not(.charging)     { color: @tertiary; }
-#battery.critical:not(.charging)    {
-  color: @error;
-  animation: blink-bat 0.5s linear infinite alternate;
+/* ── Reproductor ─────────────────────────────────────────────────────── */
+#custom-mpris {
+  color: @secondary;
+  padding-right: 12px;
 }
-@keyframes blink-bat { to { opacity: 0.4; } }
 
-/* ── Reloj ────────────────────────────────────────────────────── */
-#clock { color: @on_primary_container; background: @primary_container; }
+#custom-mpris.paused {
+  color: @text_muted;
+  font-style: italic;
+}
 
-/* ── Tooltip ──────────────────────────────────────────────────── */
-tooltip {
-  background: @surface_high;
+#custom-mpris.stopped {
+  padding: 0;
+  margin: 0;
+}
+
+/* ── Estado (derecha) ────────────────────────────────────────────────── */
+#idle_inhibitor:hover,
+#custom-notifications:hover,
+#language:hover,
+#bluetooth:hover,
+#network:hover,
+#power-profiles-daemon:hover,
+#battery:hover {
   color: @text;
-  border: 1px solid @outline_variant;
-  border-radius: 10px;
-  padding: 8px 12px;
-  font-size: 12px;
+  background: @surface;
 }
-tooltip label { color: @text; }
+
+#idle_inhibitor.activated {
+  color: @tertiary;
+}
+
+#custom-notifications.notification {
+  color: @primary;
+}
+
+#custom-notifications.dnd-notification,
+#custom-notifications.dnd-none {
+  color: @outline;
+}
+
+#language {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding-left: 12px;
+}
+
+#bluetooth.connected {
+  color: @primary;
+}
+
+#bluetooth.disabled,
+#bluetooth.off {
+  color: @outline_variant;
+}
+
+#network.disconnected {
+  color: @error;
+}
+
+#power-profiles-daemon.performance {
+  color: @tertiary;
+}
+
+#battery.charging,
+#battery.plugged {
+  color: @primary;
+}
+
+#battery.warning:not(.charging) {
+  color: @tertiary;
+}
+
+#battery.critical:not(.charging) {
+  color: @error;
+  animation: blink-bat 1s steps(2, start) infinite;
+}
+
+@keyframes blink-bat {
+  to { opacity: 0.35; }
+}
+
+/* ── Reloj ───────────────────────────────────────────────────────────────
+   El único pill fijo de la derecha: es el dato que más se consulta.     */
+#clock {
+  background: @surface;
+  color: @text;
+  font-weight: 600;
+  padding: 0 14px;
+  margin: 5px 6px;
+  border-radius: 9px;
+  transition: background-color 0.15s ease;
+}
+
+#clock:hover {
+  background: @surface_high;
+}
+
+/* ── Apagar ──────────────────────────────────────────────────────────── */
+#custom-power {
+  color: @error;
+  font-size: 14px;
+  padding-left: 10px;
+  padding-right: 14px;
+}
+
+#custom-power:hover {
+  background: @error;
+  color: @on_error;
+}

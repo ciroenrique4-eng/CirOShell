@@ -1,93 +1,210 @@
-// ~/.config/waybar/config.jsonc — versión minimalista
+// ~/.config/waybar/config.jsonc — taskbar minimal a ancho completo
+//
+// Tres zonas: acciones + workspaces a la izquierda, ventana activa al centro,
+// estado del sistema a la derecha. Sin márgenes ni esquinas redondeadas: la
+// barra es una franja pegada al borde, no una isla flotante.
+//
+// NOTA SOBRE LOS ICONOS: los glifos del rango Private Use Area del BMP
+// (U+E000–U+F8FF: los iconos de Devicons, Font Awesome, Octicons…) van
+// escritos como "\uXXXX" y no como carácter literal, porque se pierden con
+// facilidad al copiar o al pasar por herramientas que no los preservan —
+// dejando la cadena vacía y el icono invisible, sin ningún error.
+// Los "md-*" de Material Design (U+F0000 en adelante) quedan fuera del BMP:
+// JSON solo admite \uXXXX de 4 dígitos, así que esos sí van literales.
 {
   "layer": "top",
   "position": "top",
-  "height": 34,
-  "spacing": 4,
-  "margin-top": 6,
-  "margin-left": 80,
-  "margin-right": 80,
+  "height": 40,
+  "spacing": 0,
 
   "modules-left": [
+    "custom/launcher",
+    "custom/scripts",
     "hyprland/workspaces"
   ],
 
   "modules-center": [
-    "custom/mpris"
+    "hyprland/window"
   ],
 
   "modules-right": [
+    "custom/mpris",
+    "idle_inhibitor",
+    "custom/notifications",
+    "clock",
+    "hyprland/language",
+    "bluetooth",
     "network",
     "power-profiles-daemon",
     "battery",
-    "clock"
+    "custom/power"
   ],
 
+  // ─── Acciones ─────────────────────────────────────────────────────────────
+  "custom/launcher": {
+    "format": "",
+    "tooltip-format": "Aplicaciones  ·  Super",
+    "on-click": "pkill rofi || rofi -show drun"
+  },
+
+  "custom/scripts": {
+    "format": "",
+    "tooltip-format": "Scripts  ·  Super + O",
+    "on-click": "pkill rofi || rofi -show myscripts"
+  },
+
   // ─── Workspaces ───────────────────────────────────────────────────────────
+  // {icon} solo dibuja algo en los vacíos (un punto); en los ocupados se ve
+  // {windows}, que son los iconos de las apps que hay dentro.
   "hyprland/workspaces": {
-    "disable-scroll": true,
+    "disable-scroll": false,
     "all-outputs": true,
-    "format": "{icon}",
+    "format": "{icon}{windows}",
     "format-icons": {
-      "default": "",
-      "empty": "",
-      "focused": "",
-      "active": ""
+      "default": "",
+      "empty": "",
+      "active": "",
+      "urgent": ""
     },
-    "persistent-workspaces": {
-      "*": [1, 2, 3, 4, 5]
+    "persistent-workspaces": { "*": [1, 2, 3, 4, 5] },
+    "format-window-separator": "  ",
+    "window-rewrite-default": "",
+    "window-rewrite": {
+      "class<kitty>": "",
+      "class<zen>": "󰈹",
+      "class<chromium>": "",
+      "class<code>": "󰨞",
+      "class<md.obsidian.Obsidian>": "",
+      "class<steam>": "",
+      "class<steam_app_.*>": "",
+      "class<gamescope>": "",
+      "class<feishin>": "",
+      "class<Spotify>": "",
+      "class<discord|equibop|vesktop>": "",
+      "class<hyprfm|thunar|org.gnome.Nautilus>": "",
+      "class<btop>": "",
+      "class<libreoffice.*>": "󰈙",
+      "class<zoom>": "󰕧",
+      "class<github-desktop>": "",
+      "class<org.pulseaudio.pavucontrol>": "󰕾",
+      "class<imv|feh|swappy>": "",
+      "class<mpv|vlc>": ""
     }
   },
 
-  // ─── Reproductor (reemplaza a mpris, a prueba de crashes) ─────────────────
+  // ─── Ventana activa ───────────────────────────────────────────────────────
+  // initialTitle en vez de title: el nombre de la app ("Zen Browser") en lugar
+  // del título completo de la pestaña, que cambia todo el rato y baila.
+  "hyprland/window": {
+    "format": "  {initialTitle}",
+    "separate-outputs": true,
+    "max-length": 60,
+    "tooltip-format": "{title}"
+  },
+
+  // ─── Reproductor ──────────────────────────────────────────────────────────
   "custom/mpris": {
     "exec": "~/.config/waybar/scripts/mpris.sh",
     "return-type": "json",
     "restart-interval": 3,
-    "max-length": 45,
+    "max-length": 38,
     "on-click": "playerctl play-pause",
     "on-scroll-up": "playerctl next",
     "on-scroll-down": "playerctl previous"
   },
 
+  // ─── Inhibidor de suspensión ──────────────────────────────────────────────
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": { "activated": "󰅶", "deactivated": "󰛊" },
+    "tooltip-format-activated": "Suspensión inhibida",
+    "tooltip-format-deactivated": "Suspensión automática activa"
+  },
+
+  // ─── Notificaciones ───────────────────────────────────────────────────────
+  "custom/notifications": {
+    "exec": "swaync-client -swb",
+    "return-type": "json",
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "󰂚",
+      "none": "󰂜",
+      "dnd-notification": "󰂛",
+      "dnd-none": "󰂛",
+      "inhibited-notification": "󰂚",
+      "inhibited-none": "󰂜",
+      "dnd-inhibited-notification": "󰂛",
+      "dnd-inhibited-none": "󰂛"
+    },
+    "escape": true,
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw"
+  },
+
+  // ─── Reloj ────────────────────────────────────────────────────────────────
+  "clock": {
+    "format": "{:%I:%M %p}",
+    "format-alt": "{:%a %d %b}",
+    "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+
+  // ─── Distribución de teclado ──────────────────────────────────────────────
+  "hyprland/language": {
+    "format": "{short}",
+    "tooltip-format": "Distribución: {long}  ·  Alt + Shift para alternar"
+  },
+
+  // ─── Bluetooth ────────────────────────────────────────────────────────────
+  "bluetooth": {
+    "format": "󰂯",
+    "format-disabled": "󰂲",
+    "format-off": "󰂲",
+    "format-connected": "󰂱",
+    "tooltip-format": "{controller_alias}",
+    "tooltip-format-connected": "{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}",
+    "on-click": "kitty --class bluetui -e bluetuith"
+  },
+
   // ─── Red ──────────────────────────────────────────────────────────────────
   "network": {
-    "format-wifi": "󰤨  {essid}",
-    "format-ethernet": "󰈀  {ipaddr}",
-    "format-disconnected": "󰤭  Sin red",
-    "format-linked": "󰈀  {ifname}",
-    "tooltip-format-wifi": "SSID: {essid}\nSeñal: {signalStrength}%\nIP: {ipaddr}",
-    "tooltip-format-ethernet": "IP: {ipaddr}",
-    "on-click": "kitty -- nmtui"
+    "format-wifi": "󰤨",
+    "format-ethernet": "󰈀",
+    "format-disconnected": "󰤭",
+    "format-linked": "󰈀",
+    "tooltip-format-wifi": "{essid}  ·  {signalStrength}%\n{ipaddr}",
+    "tooltip-format-ethernet": "{ifname}\n{ipaddr}",
+    "tooltip-format-disconnected": "Sin conexión",
+    "on-click": "kitty --class nmtui -e nmtui"
   },
 
   // ─── Perfil de energía ────────────────────────────────────────────────────
   "power-profiles-daemon": {
     "format": "{icon}",
-    "tooltip-format": "Perfil de energía: {profile}\nDriver: {driver}",
+    "tooltip-format": "Perfil: {profile}",
     "tooltip": true,
     "format-icons": {
-      "default":     "󰾆",
+      "default": "󰾆",
       "performance": "󰓅",
-      "balanced":    "",
-      "power-saver": "󰾷"
+      "balanced": "󰾅",
+      "power-saver": "󰾆"
     }
   },
 
   // ─── Batería ──────────────────────────────────────────────────────────────
   "battery": {
     "states": { "warning": 30, "critical": 15 },
-    "format":          "{icon}  {capacity}%",
-    "format-charging": "󰂄  {capacity}%",
-    "format-plugged":  "󰚥  {capacity}%",
-    "format-icons":    ["󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"],
-    "tooltip-format":  "{timeTo} · {power:.1f}W"
+    "format": "{icon}",
+    "format-charging": "󰂄",
+    "format-plugged": "󰚥",
+    "format-icons": ["󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"],
+    "tooltip-format": "{capacity}%  ·  {timeTo}\n{power:.1f}W"
   },
 
-  // ─── Reloj (12 horas) ─────────────────────────────────────────────────────
-  "clock": {
-    "format":     "  {:%I:%M %p}",
-    "format-alt": "  {:%a %d %b %Y}",
-    "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>"
+  // ─── Apagar ───────────────────────────────────────────────────────────────
+  "custom/power": {
+    "format": "󰐥",
+    "tooltip-format": "Sesión",
+    "on-click": "~/.config/hypr/scripts/'⏻ Apagar.sh'"
   }
 }
